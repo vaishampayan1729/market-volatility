@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Data
+data/raw/*
+data/processed/*
+data/external/*
+
+# Keep data directories
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# Trained models
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.keras
+
+# Generated outputs
+outputs/
+
