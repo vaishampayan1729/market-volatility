@@ -1,0 +1,11 @@
+{
+    "hidden_layers": [
+        64
+    ],
+    "learning_rate": 0.003,
+    "weight_decay": 0.0,
+    "batch_size": 1024,
+    "classification_threshold": 0.29999999999999993,
+    "target_threshold": 0.2,
+    "target_window": 5
+}

@@ -54,51 +54,43 @@ market-volatility/
 └── requirements.txt
 ```
 ## Research Roadmap
-### Stage 0 - Reproduce the Internship
+### Stage 0 — Baseline Volatility Prediction
 
-The first stage reconstructs the essential volatility-prediction workflow
-from the earlier internship project using public SPY data.
+Stage 0 establishes a baseline for predicting whether future five-day realized volatility will substantially exceed current volatility, using daily SPY data from January 2010 onward.
 
-The original internship project used proprietary financial features that are
-not available in this repository. Therefore, this project focuses on
-reproducing the methodology rather than the exact feature set.
+The target is constructed from the ratio of future five-day realized volatility to backward-looking 20-day volatility. A log-ratio threshold of 0.2 defines the positive class.
 
-Stage 0 includes:
+The workflow includes:
 
-- data loading,
-- data cleaning,
-- exploratory data analysis,
-- volatility construction,
-- topological data analysis,
-- feature engineering,
-- baseline models,
-- tree-based models,
-- neural-network models,
-- and model comparison.
+- Data acquisition and cleaning
+- Exploratory data analysis and volatility characterization
+- Topological data analysis of sliding-window return embeddings
+- Feature engineering using conventional volatility statistics and TDA-derived features
+- Chronological training, validation, and test splits
+- Model training, hyperparameter tuning, and threshold selection
 
-The current notebooks are:
-```text
-01_data_loading.ipynb
-02_data_cleaning.ipynb
-03_eda.ipynb
-04_tda.ipynb
-05_feature_engineering.ipynb
-06_baseline_model.ipynb
-07_tree_models.ipynb
-08_neural_network.ipynb
-09_dynamics.ipynb
-10_final_predictions.ipynb
-11_model_comparison.ipynb
-```
+Four models were evaluated on the same chronological test period (2023–2026):
 
-The TDA analysis in 04_tda.ipynb provides an additional representation of
-the financial time series and investigates whether local topological
-quantities are related to conventional volatility measures.
+| Model | Accuracy | Balanced Accuracy | Precision | Recall | F1 | ROC-AUC | PR-AUC |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Random Forest | 0.5887 | 0.6765 | 0.3127 | 0.8263 | **0.4538** | **0.7557** | **0.4217** |
+| Neural Network | 0.6605 | 0.6673 | 0.3395 | 0.6789 | 0.4526 | 0.7249 | 0.3813 |
+| XGBoost | 0.5713 | 0.6636 | 0.3023 | 0.8211 | 0.4419 | 0.7359 | 0.3901 |
+| Logistic Regression | 0.7998 | 0.5547 | 0.5652 | 0.1368 | 0.2203 | 0.7353 | 0.4099 |
 
-The goal of Stage 0 is to establish a clean and reproducible baseline before
-introducing the more research-oriented experiments.
+Random Forest achieved the highest test F1, ROC-AUC, and PR-AUC, while the neural network achieved a very similar F1 score. Logistic Regression had the highest accuracy but substantially lower recall.
 
-### Stage 1 - One-Dimensional Convolutional Neural Network
+These results provide a baseline for the subsequent recurrent neural network experiments. Although the feature set includes TDA-derived descriptors, this comparison does not isolate their incremental contribution; that would require an ablation study comparing models with and without TDA features.
+
+**Reproducibility:** The notebooks document data preparation, feature construction, model selection, evaluation, and the selected classification thresholds. The `src/` directory contains reusable project utilities. Locally saved model artifacts can be used to reproduce predictions without retraining, subject to compatible software versions.
+
+### Stage 1 — Recurrent Neural Network (RNN)
+
+Stage 1 investigates recurrent neural networks for five-day-ahead volatility prediction using sequential SPY data. Building on the Stage-0 baseline, this stage explores whether recurrent architectures can better capture temporal dependencies in financial returns and volatility.
+
+The experiment will evaluate RNN-based predictions against the Stage-0 models using the same chronological evaluation framework. The methodology and conclusions will be updated after the experiments are complete.
+
+### Stage 2 - One-Dimensional Convolutional Neural Network
 
 Stage 1 investigates whether a one-dimensional convolutional neural network
 can learn useful local temporal structure directly from financial time series.
@@ -117,7 +109,7 @@ feature engineering?
 This stage provides a transition from conventional machine learning toward
 geometric and structure-aware learning.
 
-### Stage 2 - Data Augmentation and Geometric Deep Learning
+### Stage 3 - Data Augmentation and Geometric Deep Learning
 
 The central motivation for this stage comes from the internship project. The
 financial dataset was relatively small and low-to-moderate dimensional, and
@@ -160,7 +152,7 @@ The objective is therefore to test whether carefully constructed,
 mathematically motivated augmentations can improve predictive performance
 relative to training on the original dataset alone.
 
-### Stage 3 — Renormalization-Group Flow
+### Stage 4 — Renormalization-Group Flow
 
 Stage 3 explores renormalization-group ideas for financial time-series
 dynamics.
