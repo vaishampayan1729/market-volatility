@@ -1,0 +1,16 @@
+{
+    "model": "ARMA",
+    "p": 1,
+    "q": 1,
+    "training_end": "2020-12-31",
+    "validation_start": "2021-01-01",
+    "validation_end": "2022-12-31",
+    "forecast_horizon": 5,
+    "input_series": "squared_daily_log_returns",
+    "scale_factor": 10000,
+    "classification_log_threshold": 0.2,
+    "negative_forecast_handling": "clip_to_zero",
+    "model_selection": "one_step_validation_mse",
+    "validation_observations": 498,
+    "model_parameters_refitted_during_validation": false
+}
