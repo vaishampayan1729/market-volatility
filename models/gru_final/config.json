@@ -1,0 +1,19 @@
+{
+    "architecture": "GRU",
+    "lookback": 60,
+    "hidden_units": 16,
+    "dropout": 0.3,
+    "recurrent_dropout": 0.0,
+    "classification_threshold": 0.25,
+    "seeds": [
+        42,
+        123,
+        2026
+    ],
+    "features": [
+        "log_return",
+        "squared_return",
+        "vol_20d"
+    ],
+    "selection_metric": "mean_validation_F1"
+}

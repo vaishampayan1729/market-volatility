@@ -1,0 +1,20 @@
+{
+    "features": [
+        "log_return",
+        "squared_return",
+        "vol_20d"
+    ],
+    "lookback": 60,
+    "threshold": 0.25,
+    "model_files": [
+        "gru_seed_42.keras",
+        "gru_seed_123.keras",
+        "gru_seed_2026.keras"
+    ],
+    "scaler_file": "scaler.joblib",
+    "input_shape": [
+        60,
+        3
+    ],
+    "target_definition": "log(RV_future_5d / Vol_20d) > 0.2"
+}

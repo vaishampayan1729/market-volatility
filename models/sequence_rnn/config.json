@@ -1,0 +1,15 @@
+{
+    "model": "SimpleRNN",
+    "lookback": 20,
+    "features": [
+        "log_return",
+        "squared_return",
+        "vol_20d"
+    ],
+    "hidden_units": 16,
+    "selected_threshold": 0.2,
+    "selection_metric": "validation_f1",
+    "training_end": "2020-12-23",
+    "validation_start": "2021-01-04",
+    "validation_end": "2022-12-22"
+}
